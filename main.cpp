@@ -17,7 +17,7 @@ using namespace std;
 const int ECRAN_WIDTH = 751;
 const int ECRAN_HEIGHT = 761;
 const int NB_CANARD_TO_WIN = 6;
-const int NB_CANARD_PAR_NIVEAU = 10;
+const int NB_CANARD_NIVEAU = 10;
 
 int alea(int max)
 {
@@ -28,6 +28,28 @@ int alea(int max)
 
 int main(int argc, char* argv[])
 {
+
+    SDL_Surface *screen;
+    SDL_Surface *fond = SDL_LoadBMP("backGame.bmp");
+
+
+    /********************TRAVAIL ARNO******************************************************************/
+    SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
+    screen=SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE | SDL_DOUBLEBUF);
+    SDL_WM_SetCaption("Projet Duck Hunt",NULL);
+    SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0,0,255));
+    applySurface(0,0,fond,screen,NULL);
+
+    SDL_Flip(screen);
+    pause();
+
+    SDL_FreeSurface(screen);
+
+
+
+
+    /********************TRAVAIL ENZO*************************/
+
      niveau n;
      int difficulte = 0;
 
