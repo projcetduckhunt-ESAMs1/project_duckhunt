@@ -3,7 +3,9 @@ CONFIG += console
 CONFIG -= app_bundle
 CONFIG -= qt
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    level.cc \
+    duck.cc
 
 include(deployment.pri)
 qtcAddDeployment()
@@ -13,3 +15,7 @@ INCLUDEPATH += /usr/include/SDL
 
 OTHER_FILES += \
     backGame.bmp
+
+HEADERS += \
+    duck.h \
+    level.h

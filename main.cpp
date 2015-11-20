@@ -5,6 +5,8 @@
 #include <SDL/SDL_image.h>
 #include <SDL/SDL_ttf.h>
 #include <sstream>
+#include "level.h"
+#include "duck.h"
 
 using namespace std;
 
@@ -12,7 +14,7 @@ const int SCREEN_WIDTH=750;
 const int SCREEN_HEIGHT=761;
 const int SCREEN_BPP=32;
 
-struct canard
+/*struct canard
 {
   int x;     // abscisse
   int y;     // ordonnée
@@ -20,31 +22,8 @@ struct canard
   SDL_Rect lecture;
   SDL_Rect lectureFront;
   SDL_Rect lectureBack;
-};
+};*/
 
-
-void pause()
-{
-    bool esc= false;
-    SDL_Event event_pause;
-
-    while(!esc){
-        Uint8 *temp = SDL_GetKeyState(NULL);
-        SDL_WaitEvent(&event_pause);
-        if(temp[SDLK_RETURN] == 1)
-            esc=true;
-    }
-
-}
-
-
-void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
-{
-    SDL_Rect offset;
-    offset.x = x;
-    offset.y = y;
-    SDL_BlitSurface( source, clip, destination, &offset );
-}
 
 
 
