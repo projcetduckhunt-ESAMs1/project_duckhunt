@@ -11,6 +11,7 @@ void initNiveau(niveau &n, int difficulte )
    initCanard(n.listeCanard[0]);
    // trololo
 
+   // Ceci est une diff
    //initialise la difficulté du niveau
    n.difficulte = difficulte;
 }
