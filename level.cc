@@ -9,7 +9,6 @@ void initNiveau(niveau &n, int difficulte )
 {
    //initialisation du premier canard de ce niveau (il y en a 10 à faire)
    initCanard(n.listeCanard[0]);
-   // trololo
 
    //initialise la difficulté du niveau
    n.difficulte = difficulte;
