@@ -16,3 +16,6 @@ INCLUDEPATH += /usr/include/SDL
 HEADERS += \
     duck.h \
     level.h
+
+OTHER_FILES += \
+    backGame.bmp

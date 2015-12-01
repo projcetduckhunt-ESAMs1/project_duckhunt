@@ -6,10 +6,9 @@
 
 const int NB_CANARD_TO_WIN = 6;
 const int NB_CANARD_PAR_NIVEAU = 10;
-const int ECRAN_WIDTH = 751;
-const int ECRAN_HEIGHT = 761;
+const int SCREEN_WIDTH=750;
+const int SCREEN_HEIGHT=761;
 const int SCREEN_BPP=32;
-
 
 struct niveau
 {
@@ -20,5 +19,5 @@ struct niveau
 
 //Définition des prototypes de fonctions
 void initNiveau(niveau &n, int difficulte);
-
+void pause();
 #endif

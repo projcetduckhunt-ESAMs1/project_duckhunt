@@ -47,7 +47,7 @@ void moveDuck(canard &c)
     tmp.w=TAILLE;
 
     // Correction Mouvement Horizontal
-    if(c.x+TAILLE>ECRAN_WIDTH|| c.x-TAILLE<0)
+    if(c.x+TAILLE>SCREEN_WIDTH|| c.x-TAILLE<0)
     {
         c.x-=c.mvt_x;
         c.mvt_x*=-1;
@@ -58,7 +58,7 @@ void moveDuck(canard &c)
     tmp.y=c.y-TAILLE/2;
 
     // Correction Mouvement Vertical
-    if((c.y+TAILLE>ECRAN_HEIGHT) || (c.y-TAILLE<0))
+    if((c.y+TAILLE>SCREEN_HEIGHT) || (c.y-TAILLE<0))
     {
         c.y-=c.mvt_y;
         c.mvt_y*=-1;
@@ -76,9 +76,7 @@ void showDuck(canard c, SDL_Surface *s)
     SDL_FillRect(s,&r,SDL_MapRGB(s->format,255,164,255));
 }
 
-void
-applySurface(int x, int y, SDL_Surface* source,
-             SDL_Surface* destination, SDL_Rect* clip)
+void applySurface(int x, int y, SDL_Surface* source, SDL_Surface* destination, SDL_Rect* clip)
 {
     SDL_Rect offset;
     offset.x = x;
@@ -108,5 +106,27 @@ loadImageWithColorKey(string filename, int r, int g, int b)
             SDL_SetColorKey( optimizedImage, SDL_SRCCOLORKEY, colorkey );
         }
     }
+    return optimizedImage;
+}
+
+SDL_Surface * load_image( string filename )
+{
+    //Temporary storage for the image that's loaded
+    SDL_Surface* loadedImage = NULL;
+
+    //The optimized image that will be used
+    SDL_Surface* optimizedImage = NULL;
+     //Load the image
+    loadedImage = SDL_LoadBMP( filename.c_str() );
+    //If nothing went wrong in loading the image
+    if( loadedImage != NULL )
+    {
+        //Create an optimized image
+        optimizedImage = SDL_DisplayFormat( loadedImage );
+
+        //Free the old image
+        SDL_FreeSurface( loadedImage );
+    }
+    //Return the optimized image
     return optimizedImage;
 }

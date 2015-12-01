@@ -34,9 +34,9 @@ struct canard
 //Définitions des prototypes de fonctions
 void initCanard(canard &c);
 void moveDuck(canard &c);
-void showDuck(canard c, SDL_Surface *s);
+void showDuck(canard c, SDL_Surface *s); //Bosser
 int alea(int max);
 void applySurface(int x, int y, SDL_Surface* source,SDL_Surface* destination, SDL_Rect* clip);
 SDL_Surface * loadImageWithColorKey(string filename, int r, int g, int b);
-
+SDL_Surface * load_image( string filename );
 #endif

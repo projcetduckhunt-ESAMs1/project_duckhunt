@@ -10,3 +10,25 @@ void initNiveau(niveau &n, int difficulte )
    //initialise la difficulté du niveau
    n.difficulte = difficulte;
 }
+
+
+void pause()
+
+{
+
+    int continuer = 1;
+
+    SDL_Event event;
+
+
+
+    while (continuer)
+    {
+        SDL_WaitEvent(&event);
+        switch(event.type)
+        {
+            case SDL_QUIT:
+                continuer = 0;
+        }
+    }
+}
