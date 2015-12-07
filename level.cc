@@ -27,3 +27,26 @@ void pause()
         }
     }
 }
+
+void tirer(int &nbballe,int &score,canard a,canard b){
+    int x = event.button.x;
+    int y = event.button.y;
+
+    nbballe--;
+
+
+        if((x>a.x)&&(x<a.x+a.w)&&(y>a.y)&&(y<a.y+a.h))
+                   {
+                        score+=1;//a modif
+                        SDL_FreeSurface(a);
+                   }
+        if((x>b.x)&&(x<b.x+b.w)&&(y>b.y)&&(y<b.y+b.h))
+                   {
+                             score+=1;//a modif
+                             SDL_FreeSurface(b);
+                   }
+
+
+
+
+}

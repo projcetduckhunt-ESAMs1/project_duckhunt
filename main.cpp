@@ -18,6 +18,8 @@ int main(int argc, char* argv[])
     SDL_Surface *canard1;
     SDL_Event event;
     bool quit=false;
+    int nbballe=3;
+    int score=0;
     SDL_Rect posViseur;
 
     SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
@@ -39,6 +41,16 @@ int main(int argc, char* argv[])
 
         posViseur.x= event.motion.x;
         posViseur.y= event.motion.y;
+
+
+        if((event.button.button)==(SDL_BUTTON_LEFT))
+                        {
+                           tirer(nbballe,score,a,b);//penser a initialiser le niveau
+                        }
+
+
+
+
 
         SDL_Flip(screen);
 

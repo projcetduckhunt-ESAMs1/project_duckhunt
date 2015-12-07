@@ -20,4 +20,5 @@ struct niveau
 //Définition des prototypes de fonctions
 void initNiveau(niveau &n, int difficulte);
 void pause();
+void tirer(int &nbballe,int &score,canard a,canard b);
 #endif
