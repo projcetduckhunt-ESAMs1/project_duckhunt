@@ -65,7 +65,7 @@ void moveDuck(canard &c)
     }
 }
 
-void showDuck(canard c, SDL_Surface *s)
+void showDuck(canard c, SDL_Surface *s )
 {
     SDL_Rect r;
     r.x=c.x-TAILLE/2;

@@ -39,6 +39,7 @@ int main(int argc, char* argv[])
 
         posViseur.x= event.motion.x;
         posViseur.y= event.motion.y;
+        /*FIN INIT*/
 
         SDL_Flip(screen);
 
