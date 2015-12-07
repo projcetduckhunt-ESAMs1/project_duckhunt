@@ -41,6 +41,7 @@ int main(int argc, char* argv[])
 
         posViseur.x= event.motion.x;
         posViseur.y= event.motion.y;
+        /*FIN INIT*/
 
 
         if((event.button.button)==(SDL_BUTTON_LEFT))
