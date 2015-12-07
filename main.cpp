@@ -14,9 +14,12 @@ int main(int argc, char* argv[])
 {
     SDL_Surface *screen;
     SDL_Surface *fond = SDL_LoadBMP("sprites/backGame.bmp");
+    SDL_Surface *curseur = SDL_LoadBMP("sprites/viseur.bmp");
     SDL_Surface *canard1;
-    SDL_Event *event;
+    SDL_Event event;
     bool quit=false;
+
+    SDL_Rect posViseur;
 
     SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
     screen=SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE | SDL_DOUBLEBUF);
@@ -24,8 +27,23 @@ int main(int argc, char* argv[])
     SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0,0,255));
     applySurface(1,1,fond,screen,NULL);
 
-    SDL_Flip(screen);
-    pause();
+    SDL_SetColorKey(curseur, SDL_SRCCOLORKEY, SDL_MapRGB(curseur->format, 0, 0, 0));
+
+    while(!quit)
+    {
+        SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0,0,255));
+        applySurface(1,1,fond,screen,NULL);
+        SDL_Flip(screen);
+        //pause();
+        /*INITIALISATION CURSEUR*/
+        SDL_ShowCursor(SDL_DISABLE);
+        SDL_PollEvent(&event);
+
+        posViseur.x= event.motion.x;
+        posViseur.y= event.motion.y;
+
+        SDL_BlitSurface(curseur, NULL, screen, &posViseur);
+    }
 
     SDL_FreeSurface(screen);
     return EXIT_SUCCESS;
