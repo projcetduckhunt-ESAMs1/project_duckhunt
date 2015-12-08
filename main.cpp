@@ -45,9 +45,9 @@ int main(int argc, char* argv[])
 
 
         if((event.button.button)==(SDL_BUTTON_LEFT))
-                        {
-                           tirer(nbballe,score,a,b);//penser a initialiser le niveau
-                        }
+        {
+            //tirer(nbballe,score,a,b);//penser a initialiser le niveau
+        }
 
 
 

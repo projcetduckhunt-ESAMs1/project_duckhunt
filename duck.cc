@@ -125,3 +125,23 @@ SDL_Surface * load_image( string filename )
     //Return the optimized image
     return optimizedImage;
 }
+
+
+void duckSprites(int color, int move, SDL_Rect cut, int count)
+{
+    int x, y;
+    switch(color)
+    {
+        case 0: y= 230; break;
+        case 1: y= 310; break;
+        case 2: y= 400; break;
+    }
+    switch(move)
+    {
+        case 0: x= 10; break;
+        case 1: x= 220; break;
+        case 2: x= 450; break;
+        case 3: x= 530; break;
+    }
+
+}
