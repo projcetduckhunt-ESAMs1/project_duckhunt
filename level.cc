@@ -27,7 +27,7 @@ void pause()
         }
     }
 }
-
+/*
 void tirer(int &nbballe,int &score,canard a,canard b){
     int x = event.button.x;
     int y = event.button.y;
@@ -49,4 +49,4 @@ void tirer(int &nbballe,int &score,canard a,canard b){
 
 
 
-}
+}*/

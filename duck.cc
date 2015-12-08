@@ -104,6 +104,12 @@ loadImageWithColorKey(string filename, int r, int g, int b)
     return optimizedImage;
 }
 
+
+
+
+
+
+
 SDL_Surface * load_image( string filename )
 {
     //Temporary storage for the image that's loaded
@@ -127,21 +133,32 @@ SDL_Surface * load_image( string filename )
 }
 
 
-void duckSprites(int color, int move, SDL_Rect cut, int count)
+void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move, int count)
 {
-    int x, y;
-    switch(color)
+    int x, y, square, dead;
+    SDL_Rect border;
+    switch(duck.couleur)
     {
         case 0: y= 230; break;
         case 1: y= 310; break;
         case 2: y= 400; break;
+        default: cout << "Error" << endl; break;
     }
     switch(move)
     {
-        case 0: x= 10; break;
-        case 1: x= 220; break;
-        case 2: x= 450; break;
-        case 3: x= 530; break;
+        case 0: x= 10; square= 70; break;
+        case 1: x= 210; square= 80; break;
+        case 2: x= 450; square= 80; break;
+        case 3: x= 530; dead= true; break;
+        default: cout << "Error" << endl; break;
     }
+
+    border.x= x+(count*square);
+    border.y= y;
+    border.w= square;
+    border.h= square;
+    applySurface(duck.x, duck.y, sprite, screen, &border);
+
+
 
 }

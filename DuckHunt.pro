@@ -18,4 +18,15 @@ HEADERS += \
     level.h
 
 OTHER_FILES += \
-    backGame.bmp
+    backGame.bmp \
+    sprites/viseur.bmp \
+    sprites/duck.bmp \
+    sprites/backGame.bmp \
+    sprites/viseur.png \
+    sprites/shot.png \
+    sprites/points.png \
+    sprites/menu.png \
+    sprites/hit.png \
+    sprites/duck.png \
+    sprites/backGameBlit.png \
+    sprites/backGame.png
