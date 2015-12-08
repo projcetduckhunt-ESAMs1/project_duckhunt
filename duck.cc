@@ -10,7 +10,7 @@
 #include <sstream>
 using namespace std;
 
-const int TAILLE=6;
+const int TAILLE=70;
 
 int alea(int max)
 {
@@ -47,7 +47,7 @@ void moveDuck(canard &c)
     tmp.w=TAILLE;
 
     // Correction Mouvement Horizontal
-    if(c.x+TAILLE>SCREEN_WIDTH|| c.x-TAILLE<0)
+    if(c.x+TAILLE>SCREEN_WIDTH|| c.x<0)
     {
         c.x-=c.mvt_x;
         c.mvt_x*=-1;
@@ -58,7 +58,7 @@ void moveDuck(canard &c)
     tmp.y=c.y-TAILLE/2;
 
     // Correction Mouvement Vertical
-    if((c.y+TAILLE>SCREEN_HEIGHT) || (c.y-TAILLE<0))
+    if((c.y+TAILLE>480) || (c.y<0))
     {
         c.y-=c.mvt_y;
         c.mvt_y*=-1;
