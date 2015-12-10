@@ -10,7 +10,7 @@
 #include <sstream>
 using namespace std;
 
-const int TAILLE=6;
+const int TAILLE=70;
 
 int alea(int max)
 {
@@ -47,7 +47,7 @@ void moveDuck(canard &c)
     tmp.w=TAILLE;
 
     // Correction Mouvement Horizontal
-    if(c.x+TAILLE>SCREEN_WIDTH|| c.x-TAILLE<0)
+    if(c.x+TAILLE>SCREEN_WIDTH|| c.x<0)
     {
         c.x-=c.mvt_x;
         c.mvt_x*=-1;
@@ -58,7 +58,7 @@ void moveDuck(canard &c)
     tmp.y=c.y-TAILLE/2;
 
     // Correction Mouvement Vertical
-    if((c.y+TAILLE>SCREEN_HEIGHT) || (c.y-TAILLE<0))
+    if((c.y+TAILLE>480) || (c.y<0))
     {
         c.y-=c.mvt_y;
         c.mvt_y*=-1;
@@ -104,6 +104,12 @@ loadImageWithColorKey(string filename, int r, int g, int b)
     return optimizedImage;
 }
 
+
+
+
+
+
+
 SDL_Surface * load_image( string filename )
 {
     //Temporary storage for the image that's loaded
@@ -124,4 +130,35 @@ SDL_Surface * load_image( string filename )
     }
     //Return the optimized image
     return optimizedImage;
+}
+
+
+void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move, int count)
+{
+    int x, y, square, dead;
+    SDL_Rect border;
+    switch(duck.couleur)
+    {
+        case 0: y= 230; break;
+        case 1: y= 310; break;
+        case 2: y= 400; break;
+        default: cout << "Error" << endl; break;
+    }
+    switch(move)
+    {
+        case 0: x= 10; square= 70; break;
+        case 1: x= 210; square= 80; break;
+        case 2: x= 450; square= 80; break;
+        case 3: x= 530; dead= true; break;
+        default: cout << "Error" << endl; break;
+    }
+
+    border.x= x+(count*square);
+    border.y= y;
+    border.w= square;
+    border.h= square;
+    applySurface(duck.x, duck.y, sprite, screen, &border);
+
+
+
 }

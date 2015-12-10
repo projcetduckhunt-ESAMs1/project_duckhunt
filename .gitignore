@@ -1,1 +1,6 @@
 *.pro.user
+DuckHunt
+Makefile
+duck.o
+level.o
+main.o

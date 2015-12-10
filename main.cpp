@@ -10,23 +10,39 @@
 #include <duck.h>
 using namespace std;
 
-int main(int argc, char* argv[])
+int main()
 {
     SDL_Event event;
+    SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
     SDL_Surface *screen;
+    screen=SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE | SDL_DOUBLEBUF);
+    SDL_WM_SetCaption("Projet Duck Hunt",NULL);
+
     SDL_Surface *fond = SDL_LoadBMP("sprites/backGame.bmp");
-    SDL_Surface *viseur = SDL_LoadBMP("sprites/viseur.bmp");
+
+
+    SDL_Surface *viseur = loadImageWithColorKey("sprites/viseur.bmp", 0, 0, 0);
+
 
     bool quit=false;
     int nbballe=3;
     int score=0;
     int level=1;
+    int count = 0;
     SDL_Rect posViseur;
 
-    SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
+    int timer= 0;
 
-    screen=SDL_SetVideoMode(SCREEN_WIDTH,SCREEN_HEIGHT,SCREEN_BPP,SDL_HWSURFACE | SDL_DOUBLEBUF);
-    SDL_WM_SetCaption("Projet Duck Hunt",NULL);
+
+
+    /*TEMP*/
+    canard duck;
+    SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
+    initCanard(duck);
+
+
+
+
     SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0,0,255));
     applySurface(1,1,fond,screen,NULL);
     SDL_ShowCursor(SDL_DISABLE);
@@ -44,10 +60,22 @@ int main(int argc, char* argv[])
         posViseur.y= event.motion.y;
         /*FIN INIT*/
 
+        duckSprites(duck, spriteSheet, screen, 0, count);
+        timer+=1;
+        count= count%3;
+
+        if(timer>=20)
+        {
+            count+=1;
+            timer=0;
+        }
+        moveDuck(duck);
+
 
         if((event.button.button)==(SDL_BUTTON_LEFT))
         {
             //tirer(nbballe,score,duck,duck2);//penser a initialiser le niveau
+            //tirer(nbballe,score,a,b);//penser a initialiser le niveau
         }
 
 
@@ -60,6 +88,8 @@ int main(int argc, char* argv[])
     }
 
     SDL_FreeSurface(screen);
+    SDL_FreeSurface(fond);
+    SDL_FreeSurface(viseur);
     return EXIT_SUCCESS;
 }
 

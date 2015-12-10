@@ -31,7 +31,9 @@ void pause()
     }
 }
 
-void tirer(int &nbballe,int &score,canard a,canard b,SDL_Surface *canard1,SDL_Surface *canard2,SDL_Event event){
+
+void tirer(int &nbballe,int &score,canard a,canard b){
+
     int x = event.button.x;
     int y = event.button.y;
 
@@ -160,8 +162,11 @@ void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SD
         j = message.find(space,i);
     }
 
+
     mot=message.substr(i);
     mes=TTF_RenderText_Solid(font,mot.c_str(),textColor);
     applySurface(x,y,mes,screen,NULL);
     SDL_FreeSurface(mes);
 }
+
+

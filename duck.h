@@ -40,4 +40,4 @@ void applySurface(int x, int y, SDL_Surface* source,SDL_Surface* destination, SD
 SDL_Surface * loadImageWithColorKey(string filename, int r, int g, int b);
 SDL_Surface * load_image( string filename );
 void menu(SDL_Event event, SDL_Surface *screen);
-#endif
+void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move, int count);
