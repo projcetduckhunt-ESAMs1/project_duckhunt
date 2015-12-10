@@ -12,14 +12,15 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
+    SDL_Event event;
     SDL_Surface *screen;
     SDL_Surface *fond = SDL_LoadBMP("sprites/backGame.bmp");
     SDL_Surface *viseur = SDL_LoadBMP("sprites/viseur.bmp");
-    SDL_Surface *canard1;
-    SDL_Event event;
+
     bool quit=false;
     int nbballe=3;
     int score=0;
+    int level=1;
     SDL_Rect posViseur;
 
     SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
@@ -30,7 +31,7 @@ int main(int argc, char* argv[])
     applySurface(1,1,fond,screen,NULL);
     SDL_ShowCursor(SDL_DISABLE);
 
-
+    menu(event,screen);
     while(!quit)
     {
         applySurface(1,1,fond,screen,NULL);
@@ -44,9 +45,9 @@ int main(int argc, char* argv[])
 
 
         if((event.button.button)==(SDL_BUTTON_LEFT))
-                        {
-                           tirer(nbballe,score,a,b);//penser a initialiser le niveau
-                        }
+        {
+            //tirer(nbballe,score,duck,duck2);//penser a initialiser le niveau
+        }
 
 
 
