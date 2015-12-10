@@ -33,7 +33,7 @@ void pause()
 
 
 void tirer(int &nbballe,int &score,canard a,canard b){
-
+    SDL_Event event;
     int x = event.button.x;
     int y = event.button.y;
 
@@ -43,16 +43,16 @@ void tirer(int &nbballe,int &score,canard a,canard b){
     if((x>a.x)&&(x<a.x+a.w)&&(y>a.y)&&(y<a.y+a.h))
     {
         score+=1;//a modif
-        SDL_FreeSurface(canard1);
+        cout << score << endl;
+
     }
     if((x>b.x)&&(x<b.x+b.w)&&(y>b.y)&&(y<b.y+b.h))
     {
         score+=1;//a modif
-        SDL_FreeSurface(canard2);
+
     }
-
-
 }
+
 
 void menu(SDL_Event event,SDL_Surface *screen){
     bool on=true;
@@ -112,29 +112,27 @@ void menu(SDL_Event event,SDL_Surface *screen){
 
            SDL_Delay(5);
            SDL_WaitEvent(&event);
+
+           Uint8 *keystates = SDL_GetKeyState( NULL );
            if(jouer==true){
                showMessageScreen(mssg3.str(),120,300,fonts,fontSize,textColor,screen);
                showMessageScreen(mssg4.str(),200,370,fonts,fontSize,textColor,screen);
+               if( keystates[ SDLK_RETURN] || keystates[ SDLK_KP_ENTER] )
+                  on=false;
 
            }else{
                showMessageScreen(mssg5.str(),200,300,fonts,fontSize,textColor,screen);
                showMessageScreen(mssg6.str(),120,370,fonts,fontSize,textColor,screen);
+               if(  keystates[ SDLK_RETURN] || keystates[ SDLK_KP_ENTER] )
+                   SDL_Quit();
            }
-
-                 Uint8 *keystates = SDL_GetKeyState( NULL );
-
                  if( keystates[ SDLK_UP] )
-                 {
-                     jouer=true;
-                 }
+                     jouer=true;     
                  if( keystates[ SDLK_DOWN] )
-                 {
                      jouer=false;
-                 }
-                 if( keystates[ SDLK_RETURN] )
-                 {
+                 if( event.type==SDL_QUIT)
+                         SDL_Quit();
 
-                 }
           SDL_Flip(screen);
     }
 }

@@ -37,8 +37,10 @@ int main()
 
     /*TEMP*/
     canard duck;
+    canard duck2;
     SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
     initCanard(duck);
+    initCanard(duck2);
 
 
 
@@ -61,6 +63,7 @@ int main()
         /*FIN INIT*/
 
         duckSprites(duck, spriteSheet, screen, 0, count);
+        duckSprites(duck2, spriteSheet, screen, 0, count);
         timer+=1;
         count= count%3;
 
@@ -70,17 +73,19 @@ int main()
             timer=0;
         }
         moveDuck(duck);
+        moveDuck(duck2);
 
 
         if((event.button.button)==(SDL_BUTTON_LEFT))
         {
-            //tirer(nbballe,score,duck,duck2);//penser a initialiser le niveau
-            //tirer(nbballe,score,a,b);//penser a initialiser le niveau
+            tirer(nbballe,score,duck,duck2);//penser a initialiser le niveau
+
         }
 
 
 
-
+        if( event.type==SDL_QUIT)
+                SDL_Quit();
 
         SDL_Flip(screen);
 
