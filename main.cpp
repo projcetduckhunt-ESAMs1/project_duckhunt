@@ -39,13 +39,14 @@ int main()
     /*TEMP*/
     canard duck;
     canard duck2;
-    SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 255, 255, 255);
+    SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
     SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
     initCanard(duck);
     menu(event,screen);
     initCanard(duck2);
-
-
+    int scoreTemp[10];
+    for(int i=0; i<10; i++)
+        scoreTemp[i] = 0;
 
 
     SDL_FillRect(screen,&screen->clip_rect,SDL_MapRGB(screen->format,0,0,255));
@@ -84,10 +85,10 @@ int main()
 
         }
 
-        /*TEST SCORE*/
-        showScores(screen, spriteScore, 0, 0, 0);
-
-        /*FINTEST*/
+        /*TEST SCORE
+        scoreGesture(scoreTemp,1,1,true);
+        showScores(screen, spriteScore,scoreTemp);
+        FINTEST*/
 
         if( event.type==SDL_QUIT)
                 SDL_Quit();
