@@ -14,7 +14,8 @@ const int TAILLE=70;
 
 int alea(int max)
 {
-    return 1 + (int) (1.0*max * rand() / RAND_MAX);
+
+    return(1 + (int) (1.0*max * rand() / RAND_MAX));
 }
 
 void initCanard(canard &c)
@@ -24,14 +25,18 @@ void initCanard(canard &c)
     tab[1]=2;
 
     cout << "Initialisation du canard passe en parametre !" << endl;
-    c.couleur = rand()%3;
+    c.couleur= rand()%3;
     c.vitesse;
-    c.x=350;
-    c.y=150;
+    c.x=rand()%350;
+    c.y=rand()%150;
     c.w=80;
     c.h=70;
-    c.mvt_x=tab[alea(2)-1];
-    c.mvt_y=tab[alea(2)-1];
+    c.mvt_x=tab[(rand()%2)];
+    c.mvt_y=tab[(rand()%2)];
+    c.state= rand()%2;
+
+    cout << c.mvt_x << " " << c.mvt_y;
+
 }
 // (initialiser, déplacer, tuer, sauver, ...).
 

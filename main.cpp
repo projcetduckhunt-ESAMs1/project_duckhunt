@@ -12,6 +12,7 @@ using namespace std;
 
 int main()
 {
+    srand(time(NULL));
     SDL_Event event;
     SDL_Init(SDL_INIT_AUDIO | SDL_INIT_VIDEO );
     SDL_Surface *screen;
@@ -40,6 +41,7 @@ int main()
     canard duck2;
     SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
     initCanard(duck);
+    menu(event,screen);
     initCanard(duck2);
 
 
@@ -49,7 +51,6 @@ int main()
     applySurface(1,1,fond,screen,NULL);
     SDL_ShowCursor(SDL_DISABLE);
 
-    menu(event,screen);
     while(!quit)
     {
         applySurface(1,1,fond,screen,NULL);
@@ -62,8 +63,8 @@ int main()
         posViseur.y= event.motion.y;
         /*FIN INIT*/
 
-        duckSprites(duck, spriteSheet, screen, 0, count);
-        duckSprites(duck2, spriteSheet, screen, 0, count);
+        duckSprites(duck, spriteSheet, screen, duck.state, count);
+        duckSprites(duck2, spriteSheet, screen, duck2.state, count);
         timer+=1;
         count= count%3;
 

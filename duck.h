@@ -26,6 +26,7 @@ struct canard
   int h;          //Hauteur
   int mvt_x;      // mouvement sur l'axe des abscisses
   int mvt_y;      // mouvement sur l'axe des ordonnées
+  int state;
 
 };
 
