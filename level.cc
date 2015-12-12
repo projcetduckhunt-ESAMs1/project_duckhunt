@@ -169,18 +169,36 @@ void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SD
     SDL_FreeSurface(mes);
 }
 
-
-void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int ballesRestantes, int killed, int round)
+void scoreGesture(int score[], int round, int nbKilled, bool finRound)
 {
-    int left_x = 185;
-    int left_y = 660;
-    SDL_Rect square;
-    square.x= 26;
-    square.y= 33;
-    for(int i=(round*2); i<10; i++);
+    if(finRound==true)
     {
-        if(ballesRestantes == 0)
-            applySurface(40, 20,screen, scoreSheet, &square);
+        switch(nbKilled){
+            case 0: score[round*2]=1; score[round*2 + 1]=1; break;
+            case 1: score[round*2]=2; score[round*2+1]=1; break;
+            case 2: score[round*2]=2; score[round*2+1]=2; break;
+        }
+    }
+}
+
+void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int score[])
+{
+    int left_x = 205;
+    int left_y = 665;
+    SDL_Rect s;
+
+    s.y=0;
+    s.h=33;
+    s.w=23;
+
+    for(int i=0; i<10; i++)
+    {
+        switch(score[i]){
+            case 0: s.x=6; break;
+            case 1: s.x=30; break;
+            case 2: s.x=54; break;
+        }
+        applySurface(left_x+((s.w+5)*i),left_y,scoreSheet,screen,&s);
     }
 }
 
