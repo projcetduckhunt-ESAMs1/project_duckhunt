@@ -168,3 +168,17 @@ void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SD
 }
 
 
+void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int ballesRestantes, int killed, int round)
+{
+    int left_x = 185;
+    int left_y = 660;
+    SDL_Rect square;
+    square.x= 26;
+    square.y= 33;
+    for(int i=(round*2); i<10; i++);
+    {
+        if(ballesRestantes == 0)
+            applySurface(40, 20,screen, scoreSheet, &square);
+    }
+}
+

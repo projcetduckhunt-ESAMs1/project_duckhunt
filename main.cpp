@@ -39,6 +39,7 @@ int main()
     /*TEMP*/
     canard duck;
     canard duck2;
+    SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 255, 255, 255);
     SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
     initCanard(duck);
     menu(event,screen);
@@ -83,7 +84,10 @@ int main()
 
         }
 
+        /*TEST SCORE*/
+        showScores(screen, spriteScore, 0, 0, 0);
 
+        /*FINTEST*/
 
         if( event.type==SDL_QUIT)
                 SDL_Quit();
