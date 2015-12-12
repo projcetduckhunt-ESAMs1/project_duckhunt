@@ -34,8 +34,7 @@ void initCanard(canard &c)
     c.mvt_x=tab[(rand()%2)];
     c.mvt_y=tab[(rand()%2)];
     c.state= rand()%2;
-
-    cout << c.mvt_x << " " << c.mvt_y;
+    c.estvivant=true;
 
 }
 // (initialiser, déplacer, tuer, sauver, ...).

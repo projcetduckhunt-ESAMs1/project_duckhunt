@@ -32,24 +32,26 @@ void pause()
 }
 
 
-void tirer(int &nbballe,int &score,canard a,canard b){
+void tirer(int &nbball,int &score,canard a,canard b, bool &killduck){
     SDL_Event event;
     int x = event.button.x;
     int y = event.button.y;
 
-    nbballe--;
+    nbball--;
 
 
     if((x>a.x)&&(x<a.x+a.w)&&(y>a.y)&&(y<a.y+a.h))
     {
         score+=1;//a modif
+        a.estvivant=false;
         cout << score << endl;
 
     }
     if((x>b.x)&&(x<b.x+b.w)&&(y>b.y)&&(y<b.y+b.h))
     {
         score+=1;//a modif
-
+        b.estvivant=false;
+        cout << score << endl;
     }
 }
 

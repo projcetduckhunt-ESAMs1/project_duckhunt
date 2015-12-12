@@ -20,7 +20,7 @@ struct niveau
 //Définition des prototypes de fonctions
 void initNiveau(niveau &n, int difficulte);
 void pause();
-void tirer(int &nbballe, int &score, canard a, canard b);
+void tirer(int &nbballe, int &score, canard a, canard b, bool &killduck);
 void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen);
 void menu(SDL_Event event,SDL_Surface *screen);
 void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int ballesRestantes, int killed, int round);

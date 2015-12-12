@@ -26,6 +26,7 @@ int main()
 
 
     bool quit=false;
+    bool killduck=false;
     int nbballe=3;
     int score=0;
     int level=1;
@@ -76,12 +77,9 @@ int main()
         }
         moveDuck(duck);
         moveDuck(duck2);
-
-
-        if((event.button.button)==(SDL_BUTTON_LEFT))
+        if(event.button.button==SDL_BUTTON_LEFT)
         {
-            tirer(nbballe,score,duck,duck2);//penser a initialiser le niveau
-
+           tirer(nbballe,score,duck,duck2,killduck);//penser a initialiser le niveau
         }
 
         /*TEST SCORE*/
