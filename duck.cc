@@ -26,6 +26,8 @@ void initCanard(canard &c)
 
     cout << "Initialisation du canard passe en parametre !" << endl;
     c.couleur= rand()%3;
+    c.vitesses=c.couleur/3;
+    cout << c.couleur<<endl;
     c.vitesse;
     c.x=rand()%350;
     c.y=rand()%150;
@@ -43,7 +45,7 @@ void moveDuck(canard &c)
 {
     SDL_Rect tmp;
 
-    c.x+=c.mvt_x;
+    c.x+=c.mvt_x*c.vitesses;
 
     tmp.x=c.x-TAILLE/2;
     tmp.y=c.y-TAILLE/2;
@@ -56,7 +58,7 @@ void moveDuck(canard &c)
         c.x-=c.mvt_x;
         c.mvt_x*=-1;
     }
-    c.y+=c.mvt_y;
+    c.y+=c.mvt_y*c.vitesses;
 
     tmp.x=c.x-TAILLE/2;
     tmp.y=c.y-TAILLE/2;
@@ -141,6 +143,8 @@ void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move
 {
     int x, y, square, dead;
     SDL_Rect border;
+
+
     switch(duck.couleur)
     {
         case 0: y= 230; break;
@@ -148,21 +152,35 @@ void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move
         case 2: y= 400; break;
         default: cout << "Error" << endl; break;
     }
-    switch(move)
-    {
-        case 0: x= 10; square= 70; break;
-        case 1: x= 210; square= 80; break;
-        case 2: x= 450; square= 80; break;
-        case 3: x= 530; dead= true; break;
-        default: cout << "Error" << endl; break;
-    }
+
+        switch(move)
+        {
+            case 0: x= 10; square= 70; break;
+            case 1: x= 210; square= 80; break;
+            case 2: x= 450; square= 80; break;
+            default: cout << "Error" << endl; break;
+        }
 
     border.x= x+(count*square);
     border.y= y;
     border.w= square;
     border.h= square;
     applySurface(duck.x, duck.y, sprite, screen, &border);
+}
 
-
-
+void vitesse(int round,canard duck1,canard duck2){
+    switch(duck1.couleur)
+    {
+        case 0: duck1.mvt_x*=0.5 ;duck1.mvt_y=0.5; break;
+        case 1: duck1.mvt_x*=0.75 ;duck1.mvt_y=0.75; break;
+        case 2: duck1.mvt_x*=1 ;duck1.mvt_y=1 ; break;
+        default: cout << "Error" << endl; break;
+    }
+    switch(duck2.couleur)
+    {
+        case 0: duck2.mvt_x*=0.5 ;duck2.mvt_y=0.5; break;
+        case 1: duck2.mvt_x*=0.75 ;duck2.mvt_y=0.75; break;
+        case 2: duck2.mvt_x*=1 ;duck2.mvt_y=1 ; break;
+        default: cout << "Error" << endl; break;
+    }
 }

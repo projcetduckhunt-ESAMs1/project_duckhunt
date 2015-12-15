@@ -24,8 +24,9 @@ struct canard
   int y;       //position y sur le champ de tir
   int w;          //Largeur
   int h;          //Hauteur
-  int mvt_x;      // mouvement sur l'axe des abscisses
-  int mvt_y;      // mouvement sur l'axe des ordonnées
+  float mvt_x;      // mouvement sur l'axe des abscisses
+  float mvt_y;      // mouvement sur l'axe des ordonnées
+  float vitesses;
   int state;
   bool estvivant;
 

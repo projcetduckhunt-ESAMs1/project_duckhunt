@@ -24,25 +24,37 @@ int main()
 
     SDL_Surface *viseur = loadImageWithColorKey("sprites/viseur.bmp", 0, 0, 0);
 
-
     bool quit=false;
-    bool killduck=false;
+    bool finround=false;
+    int round=-1;
+    int nbKilled=0;
     int nbballe=3;
-    int score=0;
+    int score=0;// rouge 1500 bleu 1000 noir 500
     int level=1;
     int count = 0;
     SDL_Rect posViseur;
 
     int timer= 0;
 
+    TTF_Init();
+    TTF_Font *fonts;
+    SDL_Color textColor= {255,255,255};
+    int fontSize=35;
+    string police="font/duck_hunt.ttf";
+    fonts = TTF_OpenFont(police.c_str(),fontSize);
 
+    ostringstream msgscore;
+    msgscore.flush();
+    msgscore.str("");
+    msgscore <<  score;
 
     /*TEMP*/
-    canard duck;
+    canard duck1;
     canard duck2;
     SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
     SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
-    initCanard(duck);
+    SDL_Surface *spritBall = loadImageWithColorKey("sprites/shot.bmp", 255, 255, 255);
+    initCanard(duck1);
     menu(event,screen);
     initCanard(duck2);
     int scoreTemp[10];
@@ -57,17 +69,22 @@ int main()
     while(!quit)
     {
         applySurface(1,1,fond,screen,NULL);
+        scoreGesture(scoreTemp,round,nbKilled,finround);
+        showScores(screen, spriteScore,scoreTemp);
 
-        /*INITIALISATION CURSEUR*/
+
+        msgscore.str("");
+        msgscore <<  score;
+
+        showBall(nbballe,screen, spritBall);
+        showMessageScreen(msgscore.str(),575,670,fonts,fontSize,textColor,screen);
+        duckSprites(duck1, spriteSheet, screen, duck1.state, count);
+        duckSprites(duck2, spriteSheet, screen, duck2.state, count);
         applySurface(posViseur.x,posViseur.y,viseur, screen, NULL);
-        SDL_PollEvent(&event);
 
-        posViseur.x= event.motion.x;
-        posViseur.y= event.motion.y;
         /*FIN INIT*/
 
-        duckSprites(duck, spriteSheet, screen, duck.state, count);
-        duckSprites(duck2, spriteSheet, screen, duck2.state, count);
+
         timer+=1;
         count= count%3;
 
@@ -76,20 +93,35 @@ int main()
             count+=1;
             timer=0;
         }
-        moveDuck(duck);
+
+        moveDuck(duck1);
         moveDuck(duck2);
-        if(event.button.button==SDL_BUTTON_LEFT)
-        {
-           tirer(nbballe,score,duck,duck2,killduck);//penser a initialiser le niveau
+
+        while(SDL_PollEvent(&event)){
+            if(event.type==SDL_MOUSEBUTTONUP){
+                if(event.button.button==SDL_BUTTON_LEFT){
+                    tirer(nbballe,score,duck1,duck2,posViseur,nbKilled);
+                }
+            }
+
+            if(event.type==SDL_MOUSEMOTION){
+                posViseur.x= event.motion.x;
+                posViseur.y= event.motion.y;
+            }
+
+            if( event.type==SDL_QUIT)
+                SDL_Quit();
         }
 
-        /*TEST SCORE
-        scoreGesture(scoreTemp,1,1,true);
-        showScores(screen, spriteScore,scoreTemp);
-        FINTEST*/
 
-        if( event.type==SDL_QUIT)
-                SDL_Quit();
+
+        if(nbballe==0 || nbKilled==2){
+            finround=true;
+            round++;
+            nbballe=3;
+            cout << "Round :" << round << endl;
+        }
+
 
         SDL_Flip(screen);
 
