@@ -233,3 +233,15 @@ void showBall(int nbball, SDL_Surface* screen, SDL_Surface* spriteBall)
     }
 
 }
+
+void NextRound(int &nbballe, int &nbKilled,int &round, bool &finround,canard &duck1,canard &duck2){
+
+    if(nbballe==0 || (nbKilled==2 && (duck1.del==true && duck2.del==true))){
+        finround=true;
+        round++;
+        nbballe=3;
+        cout << "Round :" << round << endl;
+        initCanard(duck1);
+        initCanard(duck2);
+    }
+}

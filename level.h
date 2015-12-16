@@ -26,4 +26,5 @@ void menu(SDL_Event event,SDL_Surface *screen);
 void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int score[]);
 void scoreGesture(int score[], int round, int &nbKilled, bool &finRound);
 void showBall(int nbball,SDL_Surface* screen, SDL_Surface* spriteBall);
+void NextRound(int &nbballe, int &nbKilled, int &round, bool &finround, canard &duck1, canard &duck2);
 #endif

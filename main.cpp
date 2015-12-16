@@ -20,12 +20,14 @@ int main()
     SDL_WM_SetCaption("Projet Duck Hunt",NULL);
 
     SDL_Surface *fond = SDL_LoadBMP("sprites/backGame.bmp");
+    SDL_Surface *fond2 = loadImageWithColorKey("sprites/backGameBlit.png",0,0,0);
 
 
     SDL_Surface *viseur = loadImageWithColorKey("sprites/viseur.bmp", 0, 0, 0);
 
     bool quit=false;
     bool finround=false;
+
     int round=-1;
     int nbKilled=0;
     int nbballe=3;
@@ -52,7 +54,7 @@ int main()
     canard duck1;
     canard duck2;
     SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
-    SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.bmp", 228, 255, 0);
+    SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.png", 228, 255, 0);
     SDL_Surface *spritBall = loadImageWithColorKey("sprites/shot.bmp", 255, 255, 255);
     initCanard(duck1);
     menu(event,screen);
@@ -68,38 +70,38 @@ int main()
 
     while(!quit)
     {
-        applySurface(1,1,fond,screen,NULL);
-        scoreGesture(scoreTemp,round,nbKilled,finround);
-        showScores(screen, spriteScore,scoreTemp);
-
-
-        msgscore.str("");
-        msgscore <<  score;
-
-        showBall(nbballe,screen, spritBall);
-        showMessageScreen(msgscore.str(),575,670,fonts,fontSize,textColor,screen);
+        applySurface(0,0,fond,screen,NULL);
         duckSprites(duck1, spriteSheet, screen, duck1.state, count);
         duckSprites(duck2, spriteSheet, screen, duck2.state, count);
+        applySurface(0,0,fond2,screen,NULL);
+        scoreGesture(scoreTemp,round,nbKilled,finround);
+        showScores(screen, spriteScore,scoreTemp);
+        msgscore.str("");
+        msgscore <<  score;
+        showBall(nbballe,screen, spritBall);
+        showMessageScreen(msgscore.str(),575,670,fonts,fontSize,textColor,screen);
         applySurface(posViseur.x,posViseur.y,viseur, screen, NULL);
 
+        SDL_Delay(10);
         /*FIN INIT*/
 
 
         timer+=1;
-        count= count%3;
 
-        if(timer>=20)
+
+        if(timer>=5)
         {
             count+=1;
             timer=0;
         }
+        count=count%3;
 
         moveDuck(duck1);
         moveDuck(duck2);
 
         while(SDL_PollEvent(&event)){
             if(event.type==SDL_MOUSEBUTTONUP){
-                if(event.button.button==SDL_BUTTON_LEFT){
+                if(event.button.button==SDL_BUTTON_LEFT && nbballe>0){
                     tirer(nbballe,score,duck1,duck2,posViseur,nbKilled);
                 }
             }
@@ -115,12 +117,7 @@ int main()
 
 
 
-        if(nbballe==0 || nbKilled==2){
-            finround=true;
-            round++;
-            nbballe=3;
-            cout << "Round :" << round << endl;
-        }
+        NextRound(nbballe,nbKilled,round,finround,duck1,duck2);
 
 
         SDL_Flip(screen);

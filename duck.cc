@@ -1,4 +1,3 @@
-#include "duck.h"
 #include "level.h"
 #include <ctime>
 #include <iostream>
@@ -37,6 +36,7 @@ void initCanard(canard &c)
     c.mvt_y=tab[(rand()%2)];
     c.state= rand()%2;
     c.estvivant=true;
+    c.del=false;
 
 }
 // (initialiser, déplacer, tuer, sauver, ...).
@@ -45,7 +45,7 @@ void moveDuck(canard &c)
 {
     SDL_Rect tmp;
 
-    c.x+=c.mvt_x*c.vitesses;
+    c.x+=c.mvt_x;
 
     tmp.x=c.x-TAILLE/2;
     tmp.y=c.y-TAILLE/2;
@@ -53,22 +53,31 @@ void moveDuck(canard &c)
     tmp.w=TAILLE;
 
     // Correction Mouvement Horizontal
-    if(c.x+TAILLE>SCREEN_WIDTH|| c.x<0)
+    if((c.x+TAILLE>SCREEN_WIDTH|| c.x<0) && c.estvivant==true)
     {
         c.x-=c.mvt_x;
         c.mvt_x*=-1;
+    }else if((c.x+TAILLE>SCREEN_WIDTH|| c.x<0) && c.estvivant==false)
+    {
+       c.del=true;
+       c.mvt_y=0;
     }
-    c.y+=c.mvt_y*c.vitesses;
+
+    c.y+=c.mvt_y;
 
     tmp.x=c.x-TAILLE/2;
     tmp.y=c.y-TAILLE/2;
 
     // Correction Mouvement Vertical
-    if((c.y+TAILLE>480) || (c.y<0))
+    if(((c.y+TAILLE>480) || (c.y<0)) && c.estvivant==true)
     {
         c.y-=c.mvt_y;
         c.mvt_y*=-1;
+    }else if(((c.y+TAILLE>580) || (c.y<0)) && c.estvivant==false){
+       c.del=true;
+       c.mvt_y=0;
     }
+
 }
 
 void showDuck(canard c, SDL_Surface *s )
@@ -123,7 +132,7 @@ SDL_Surface * load_image( string filename )
 
     //The optimized image that will be used
     SDL_Surface* optimizedImage = NULL;
-     //Load the image
+    //Load the image
     loadedImage = SDL_LoadBMP( filename.c_str() );
     //If nothing went wrong in loading the image
     if( loadedImage != NULL )
@@ -139,48 +148,71 @@ SDL_Surface * load_image( string filename )
 }
 
 
-void duckSprites(canard duck, SDL_Surface* sprite, SDL_Surface* screen, int move, int count)
+void duckSprites(canard &duck, SDL_Surface* sprite, SDL_Surface* screen, int move, int count)
 {
-    int x, y, square, dead;
+    int x, y, w,h,square;
     SDL_Rect border;
 
-
-    switch(duck.couleur)
-    {
+    if(duck.estvivant==true){
+        switch(duck.couleur)
+        {
         case 0: y= 230; break;
-        case 1: y= 310; break;
-        case 2: y= 400; break;
+        case 1: y= 316; break;
+        case 2: y= 402; break;
         default: cout << "Error" << endl; break;
-    }
+        }
 
         switch(move)
         {
-            case 0: x= 10; square= 70; break;
-            case 1: x= 210; square= 80; break;
-            case 2: x= 450; square= 80; break;
-            default: cout << "Error" << endl; break;
+        case 0: x= 20; w= 63; h=62; break;
+        case 1: x= 218; w= 72; h=70;break;
+        default: cout << "Error" << endl; break;
         }
 
-    border.x= x+(count*square);
-    border.y= y;
-    border.w= square;
-    border.h= square;
+        square=count*w;
+        if(square==(3*w))
+                square=square%3;
+        border.x= x+square;
+        border.y= y;
+        border.w= w;
+        border.h= h;
+    }else if(duck.estvivant==false && duck.del==false){
+        switch(duck.couleur)
+        {
+        case 0: y= 230; break;
+        case 1: y= 316; break;
+        case 2: y= 402; break;
+        default: cout << "Error" << endl; break;
+        }
+        x= 538; w= 42; h=78;
+
+        border.x= x+(count%2*w);
+        border.y= y;
+        border.w= w;
+        border.h= h;
+        duck.mvt_x=0;
+        duck.mvt_y=3;
+    }
+    else{
+        duck.mvt_x=0;
+        duck.mvt_y=0;
+    }
     applySurface(duck.x, duck.y, sprite, screen, &border);
 }
 
 void vitesse(int round,canard duck1,canard duck2){
     switch(duck1.couleur)
     {
-        case 0: duck1.mvt_x*=0.5 ;duck1.mvt_y=0.5; break;
-        case 1: duck1.mvt_x*=0.75 ;duck1.mvt_y=0.75; break;
-        case 2: duck1.mvt_x*=1 ;duck1.mvt_y=1 ; break;
-        default: cout << "Error" << endl; break;
+    case 0: duck1.mvt_x*=0.5 ;duck1.mvt_y=0.5; break;
+    case 1: duck1.mvt_x*=0.75 ;duck1.mvt_y=0.75; break;
+    case 2: duck1.mvt_x*=1 ;duck1.mvt_y=1 ; break;
+    default: cout << "Error" << endl; break;
     }
     switch(duck2.couleur)
     {
-        case 0: duck2.mvt_x*=0.5 ;duck2.mvt_y=0.5; break;
-        case 1: duck2.mvt_x*=0.75 ;duck2.mvt_y=0.75; break;
-        case 2: duck2.mvt_x*=1 ;duck2.mvt_y=1 ; break;
-        default: cout << "Error" << endl; break;
+    case 0: duck2.mvt_x*=1 ;duck2.mvt_y=0.5; break;
+    case 1: duck2.mvt_x*=1;duck2.mvt_y=1; break;
+    case 2: duck2.mvt_x*=1 ;duck2.mvt_y=1 ; break;
+    default: cout << "Error" << endl; break;
     }
 }
