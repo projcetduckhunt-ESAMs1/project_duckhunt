@@ -36,7 +36,7 @@ struct canard
 
 //Définitions des prototypes de fonctions
 void initCanard(canard &c);
-void moveDuck(canard &c);
+void moveDuck(canard &c, int nbball);
 void showDuck(canard c, SDL_Surface *s); //Bosser
 int alea(int max);
 void applySurface(int x, int y, SDL_Surface* source,SDL_Surface* destination, SDL_Rect* clip);

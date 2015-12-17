@@ -31,6 +31,19 @@ void pause()
     }
 }
 
+/****************** Nom de la fonction **********************
+* tirer                                                     *
+******************** Auteur , Dates *************************
+* Nom/Date : Enzo Sagnelonge                                *
+********************* Description ***************************
+* Permet de tirer une balles / incrémenter le score et le nb*
+*  de balle / et de tuer les canard                         *
+*********************** Entrées *****************************
+* Le nombre de balle / Le score les struture des 2 canard / *
+* le SDL_Rect du viseur et le nombre de kill                *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 
 void tirer(int &nbball, int &score, canard &a, canard &b, SDL_Rect posViseur, int &nbKilled){
 
@@ -60,13 +73,19 @@ void tirer(int &nbball, int &score, canard &a, canard &b, SDL_Rect posViseur, in
     }
     cout << "Score :"<< score << endl;
     cout << "nbballe :"<< nbball << endl;
-
-
-
-
 }
 
-
+/****************** Nom de la fonction **********************
+*  menu                                                     *
+******************** Auteur , Dates *************************
+* Nom/Date : Enzo Sagnelonge                                *
+********************* Description ***************************
+* Permet d'afficher le menu du jeu                          *
+*********************** Entrées *****************************
+* SDL_Event événement    SDL_Surface  screen                *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void menu(SDL_Event event,SDL_Surface *screen){
     bool on=true;
     bool jouer= true;
@@ -150,6 +169,17 @@ void menu(SDL_Event event,SDL_Surface *screen){
     }
 }
 
+/****************** Nom de la fonction **********************
+* showMessageScreen                                         *
+******************** Auteur , Dates *************************
+* Nom/Date : Professeur de l'iut informatique de bdx        *
+********************* Description ***************************
+* Permet d'afficher des messages à lécran                   *
+*********************** Entrées *****************************
+* Vous décrivez ici les données en entrée de la fonction    *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SDL_Color textColor,SDL_Surface* &screen)
 {
     string mot="";
@@ -180,6 +210,18 @@ void showMessageScreen(string message,int x,int y,TTF_Font *font,int fontSize,SD
     SDL_FreeSurface(mes);
 }
 
+/****************** Nom de la fonction **********************
+* scoreGesture                                              *
+******************** Auteur , Dates *************************
+* Nom/Date : Arno Marty                                     *
+********************* Description ***************************
+* Permet d'afficher le bilan des canard tuer                *
+*********************** Entrées *****************************
+* un tableau de score/ le numero du round / me nombre de    *
+* kill / la fin du round                                    *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void scoreGesture(int score[], int round, int &nbKilled, bool &finRound)
 {
     if(finRound==true)
@@ -195,6 +237,17 @@ void scoreGesture(int score[], int round, int &nbKilled, bool &finRound)
     }
 }
 
+/****************** Nom de la fonction **********************
+* showScores                                                *
+******************** Auteur , Dates *************************
+* Nom/Date : Enzo Sagnelonge                                *
+********************* Description ***************************
+* Permet d'afficher le score                                *
+*********************** Entrées *****************************
+* La surface de l'écran / du score et le score              *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int score[])
 {
     int left_x = 205;
@@ -216,6 +269,18 @@ void showScores(SDL_Surface* screen, SDL_Surface* scoreSheet, int score[])
     }
 }
 
+/****************** Nom de la fonction **********************
+* showBall                                                  *
+******************** Auteur , Dates *************************
+* Nom/Date : Enzo Sagnelonge                                *
+********************* Description ***************************
+* Permet l'affichage du nombre de balle restatantes         *
+*********************** Entrées *****************************
+* Nombre de balle / surface de l'ecran / surface de l'image *
+* de la balle                                               *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void showBall(int nbball, SDL_Surface* screen, SDL_Surface* spriteBall)
 {
     int left_x = 65;
@@ -234,9 +299,20 @@ void showBall(int nbball, SDL_Surface* screen, SDL_Surface* spriteBall)
 
 }
 
+/****************** Nom de la fonction **********************
+* NextRound                                                 *
+******************** Auteur , Dates *************************
+* Nom/Date : Enzo Sagnelonge                                *
+********************* Description ***************************
+* Permet de passer au round suivant                         *
+*********************** Entrées *****************************
+* nb balle/ nb kill / nuemro du round / booleen de fin de   *
+* round / les structure des 2 canards                       *
+*********************** Sorties *****************************
+* Pas de sortie dans un void                                *
+************************************************************/
 void NextRound(int &nbballe, int &nbKilled,int &round, bool &finround,canard &duck1,canard &duck2){
-
-    if(nbballe==0 || (nbKilled==2 && (duck1.del==true && duck2.del==true))){
+    if(duck1.del==true && duck2.del==true){
         finround=true;
         round++;
         nbballe=3;
