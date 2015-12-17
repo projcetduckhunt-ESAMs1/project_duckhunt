@@ -54,7 +54,7 @@ int main()
     canard duck1;
     canard duck2;
     SDL_Surface *spriteScore = loadImageWithColorKey("sprites/hit.png", 0, 0, 0);
-    SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck.png", 228, 255, 0);
+    SDL_Surface *spriteSheet = loadImageWithColorKey("sprites/duck2.png", 228, 255, 0);
     SDL_Surface *spritBall = loadImageWithColorKey("sprites/shot.bmp", 255, 255, 255);
     initCanard(duck1);
     menu(event,screen);
@@ -96,9 +96,15 @@ int main()
             timer=0;
         }
         count=count%3;
+<<<<<<< HEAD
         NextLevel(level,fonts,fontSize,textColor,screen);
         moveDuck(duck1);
         moveDuck(duck2);
+=======
+
+        moveDuck(duck1,nbballe);
+        moveDuck(duck2,nbballe);
+>>>>>>> audace
 
         while(SDL_PollEvent(&event)){
             if(event.type==SDL_MOUSEBUTTONUP){
