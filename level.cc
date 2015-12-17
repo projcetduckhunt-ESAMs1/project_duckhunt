@@ -66,6 +66,12 @@ void tirer(int &nbball, int &score, canard &a, canard &b, SDL_Rect posViseur, in
 
 }
 
+void strToOstr(string text){
+    ostringstream mssg6;
+    mssg6.flush();
+    mssg6.str("");
+    mssg6 <<  text;
+}
 
 void menu(SDL_Event event,SDL_Surface *screen){
     bool on=true;
@@ -243,5 +249,25 @@ void NextRound(int &nbballe, int &nbKilled,int &round, bool &finround,canard &du
         cout << "Round :" << round << endl;
         initCanard(duck1);
         initCanard(duck2);
+        if(round==5){
+            round=0;
+            level++;
+        }
     }
+}
+
+
+void NextLevel(int level, TTF_Font *fonts, int fontSize, SDL_Color textColor, SDL_Surface *screen){
+    ostringstream mssg1, mssg2;
+    mssg1.flush();
+    mssg1.str("");
+    mssg1 <<  "Niveau ";
+    mssg2.flush();
+    mssg2.str("");
+    mssg2 << level;
+
+    showMessageScreen(mssg1.str(),360,300,fonts,fontSize,textColor,screen);
+    showMessageScreen(mssg2.str(),500,300,fonts,fontSize,textColor,screen);
+
+
 }

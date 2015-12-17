@@ -70,6 +70,7 @@ int main()
 
     while(!quit)
     {
+
         applySurface(0,0,fond,screen,NULL);
         duckSprites(duck1, spriteSheet, screen, duck1.state, count);
         duckSprites(duck2, spriteSheet, screen, duck2.state, count);
@@ -95,7 +96,7 @@ int main()
             timer=0;
         }
         count=count%3;
-
+        NextLevel(level,fonts,fontSize,textColor,screen);
         moveDuck(duck1);
         moveDuck(duck2);
 
